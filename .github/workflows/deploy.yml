@@ -6,19 +6,16 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
-      # Check out the code from the repository
-      - name: Checkout code
-        uses: actions/checkout@v3
-
       # Log in to the remote server using SSH
       - name: SSH Login and Execute Commands
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }} # If you use a password (or use a private key)
+          port: 22
           script: |
             cd /home/
             sudo ls
